@@ -1,0 +1,1 @@
+ - Test biblioteki console-log
