@@ -1,1 +1,2 @@
- - Test biblioteki console-log
+- Rozpoczęcie budowy głównej części analizatora
+- Test biblioteki console-log
