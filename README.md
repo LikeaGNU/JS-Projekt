@@ -1,8 +1,13 @@
 # Projekt z przedmiotu Języki Skryptowe
 ## Temat nr 25: Analizator danych meteorologicznych
-### Wykonali:
+
+### Wykonali
 - Wojciech Lis
 - Tomasz Kundera
+
+### Zależności
+- `console-log`
+- `matplotlib`
 
 ### Krótka instrukcja użytkowania
 ```
