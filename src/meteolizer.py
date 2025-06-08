@@ -9,6 +9,12 @@ import numpy as np
 
 import utils.data_generator as datagen
 
+# Naprawia warning:
+# UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail.
+#matplotlib.use('SVG')
+plt.switch_backend('agg')
+csv_data = []
+
 def get_stats_from_file():
     pass
 
@@ -27,6 +33,8 @@ def datafile_generation_screen():
     datafile_screen.println(f'Wygenerowano plik CSV i zapisano w {filepath}')
 
 def datafile_import_screen():
+    global csv_data
+
     datafile_screen = Screen()
     datafile_screen.clear()
 
@@ -34,12 +42,42 @@ def datafile_import_screen():
     filepath = datafile_screen.input('Podaj ścieżkę plik CSV: ')
 
     file_content = datagen.data_reader(filepath)
+    csv_data = file_content.copy()
 
-    return file_content
+def save_graph_screen():
+    global csv_data
 
+    save_screen = Screen()
+    save_screen.clear()
+    save_screen.println('Nazwij plik wykresu')
+
+    xp = [ x['pomiar'] for x in csv_data ]
+    yp = [ y['wartosc'] for y in csv_data ]
+
+    filepath = save_screen.input('Wprowadź ścieżkę pliku obrazu z wykresem: ')
+
+    plt.plot(xp, yp)
+    plt.savefig(filepath)
+
+    save_screen.input(f'Zapisano plik obrazu w {filepath}')
+
+def data_plot_screen():
+    global csv_data
+
+    plot_screen = Screen()
+    plot_screen.clear()
+    plot_screen.println('Wykreśl graf w oparciu o zaimportowane dane\n\n')
+
+    xp = [ x['pomiar'] for x in csv_data ]
+    yp = [ y['wartosc'] for y in csv_data ]
+
+    plot_screen.input('Naciśnij dowolny klawisz, by wykreślić wykres... ')
+
+    plt.plot(xp, yp)
+    plt.show()
+    plt.close()
 
 def get_graph_from_file(filepath):
-
     xp = np.array( [ 0, 6 ] )
     yp = np.array( [ 0, 250 ] )
 
@@ -64,12 +102,14 @@ def main():
         import_file = FunctionItem('Importuj plik CSV z danymi', datafile_import_screen)
         gen_file = FunctionItem('Wygeneruj plik CSV z danymi', datafile_generation_screen)
         stats_data = FunctionItem('Wylicz i wyświetl dane statystyczne importowanego pliku', get_stats_from_file)
-        plot_graph = FunctionItem('Wykreśl graf na podstawie danych z importowanego pliku', get_graph_from_file)
+        plot_graph = FunctionItem('Wykreśl graf na podstawie danych z importowanego pliku', data_plot_screen)
+        save_graph = FunctionItem('Zapisz graf wykreślony na podstawie pliku CSV', save_graph_screen)
 
         menu.append_item(import_file)
         menu.append_item(gen_file)
         menu.append_item(stats_data)
         menu.append_item(plot_graph)
+        menu.append_item(save_graph)
 
         menu.show()
 

@@ -38,6 +38,7 @@ def data_writer(filepath, data):
 
     with open(filepath, 'w') as f:
         writer = csv.writer(f)
+        writer.writerow(['pomiar','wartosc'])
         writer.writerows(data)
 
 def data_reader(filepath):
@@ -48,7 +49,7 @@ def data_reader(filepath):
     file_content = []
 
     with open(filepath, 'r') as f:
-        reader = csv.reader(f)
+        reader = csv.DictReader(f)
 
         for line in reader:
             file_content.append(line)
