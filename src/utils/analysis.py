@@ -2,7 +2,11 @@ import functools
 import math
 
 def get_arithmetic_average(data):
-    length = len(stations)
+    """
+    Oblicz średnią arytmetyczną
+    """
+
+    length = len(data)
 
     dat_sum = reduce(lambda x, y: x + y, [ x for x in data ])
 
@@ -14,6 +18,10 @@ def get_arithmetic_average(data):
         return res
 
 def get_standard_deviation(data):
+    """
+    Oblicz odchylenie standardowe
+    """
+
     deviation = 0
     res = 0
     length = len(data)
@@ -21,7 +29,7 @@ def get_standard_deviation(data):
     avg = get_arithmetic_average(data)
 
     for i in range(length):
-        deviation += (avg - i) ** 2
+        deviation += (i - avg) ** 2
 
     try:
         deviation /= length
