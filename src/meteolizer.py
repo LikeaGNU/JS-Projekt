@@ -24,8 +24,18 @@ def datafile_generation_screen():
     filepath = datafile_screen.input('Podaj ścieżkę plik CSV: ')
     generate_datafile(filepath)
 
-    datafile_screen.println('Wygenerowano plik CSV i zapisano w {filepath}')
+    datafile_screen.println(f'Wygenerowano plik CSV i zapisano w {filepath}')
 
+def datafile_import_screen():
+    datafile_screen = Screen()
+    datafile_screen.clear()
+
+    datafile_screen.println('Importowanie pliku z danymi\n\n')
+    filepath = datafile_screen.input('Podaj ścieżkę plik CSV: ')
+
+    file_content = datagen.data_reader(filepath)
+
+    return file_content
 
 def get_graph_from_file(filepath):
 
@@ -50,7 +60,7 @@ def main():
     def console_menu():
         menu = ConsoleMenu('Meteolizer', 'Analizator danych meteorologicznych')
 
-        import_file = FunctionItem('Importuj plik CSV z danymi', input, [ 'Podaj ścieżkę pliku z danymi >  ' ])
+        import_file = FunctionItem('Importuj plik CSV z danymi', datafile_import_screen)
         gen_file = FunctionItem('Wygeneruj plik CSV z danymi', datafile_generation_screen)
         stats_data = FunctionItem('Wylicz i wyświetl dane statystyczne importowanego pliku', get_stats_from_file)
         plot_graph = FunctionItem('Wykreśl graf na podstawie danych z importowanego pliku', get_graph_from_file)
@@ -64,10 +74,6 @@ def main():
 
     # Wykonywanie
     argparser()
-
-    #scr = Screen()
-    #scr.printf("test\n")
-
     console_menu()
 
 if __name__ == '__main__':

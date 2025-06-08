@@ -31,7 +31,6 @@ def file_data_generator(n, values):
         data.append(data_set)
     return data
 
-
 def data_writer(filepath, data):
     """
     Utwórz plik CSV i wpisz do niego dane meteorologiczne
@@ -40,6 +39,21 @@ def data_writer(filepath, data):
     with open(filepath, 'w') as f:
         writer = csv.writer(f)
         writer.writerows(data)
+
+def data_reader(filepath):
+    """
+    Odczytaj plik CSV i zwróć jego zawartość w liście
+    """
+
+    file_content = []
+
+    with open(filepath, 'r') as f:
+        reader = csv.reader(f)
+
+        for line in reader:
+            file_content.append(line)
+
+    return file_content
 
 def main():
     data = file_data_generator(10, (20, 30))
