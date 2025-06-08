@@ -7,11 +7,28 @@ import matplotlib.pyplot as plt
 import argparse
 import numpy as np
 
+import utils.data_generator as datagen
+
 def get_stats_from_file():
     pass
 
+def generate_datafile(filepath):
+    data = datagen.file_data_generator(31, (20, 30))
+    datagen.data_writer(filepath, data)
 
-def get_graph_from_file():
+def datafile_generation_screen():
+    datafile_screen = Screen()
+    datafile_screen.clear()
+
+    datafile_screen.println('Generowanie pliku z danymi\n\n')
+    filepath = datafile_screen.input('Podaj ścieżkę plik CSV: ')
+    generate_datafile(filepath)
+
+    datafile_screen.println('Wygenerowano plik CSV i zapisano w {filepath}')
+
+
+def get_graph_from_file(filepath):
+
     xp = np.array( [ 0, 6 ] )
     yp = np.array( [ 0, 250 ] )
 
@@ -34,7 +51,7 @@ def main():
         menu = ConsoleMenu('Meteolizer', 'Analizator danych meteorologicznych')
 
         import_file = FunctionItem('Importuj plik CSV z danymi', input, [ 'Podaj ścieżkę pliku z danymi >  ' ])
-        gen_file = FunctionItem('Wygeneruj plik CSV z danymi', input, [ 'aaaa' ] )
+        gen_file = FunctionItem('Wygeneruj plik CSV z danymi', datafile_generation_screen)
         stats_data = FunctionItem('Wylicz i wyświetl dane statystyczne importowanego pliku', get_stats_from_file)
         plot_graph = FunctionItem('Wykreśl graf na podstawie danych z importowanego pliku', get_graph_from_file)
 
@@ -47,6 +64,10 @@ def main():
 
     # Wykonywanie
     argparser()
+
+    #scr = Screen()
+    #scr.printf("test\n")
+
     console_menu()
 
 if __name__ == '__main__':
