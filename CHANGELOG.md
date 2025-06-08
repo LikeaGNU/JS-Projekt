@@ -1,2 +1,3 @@
+- Utworzenie generatora plików z danymi meteo
 - Rozpoczęcie budowy głównej części analizatora
 - Test biblioteki console-log
