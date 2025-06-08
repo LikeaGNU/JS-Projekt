@@ -9,10 +9,6 @@ import numpy as np
 
 import utils.data_generator as datagen
 
-# Naprawia warning:
-# UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail.
-#matplotlib.use('SVG')
-plt.switch_backend('agg')
 csv_data = []
 
 def get_stats_from_file():
@@ -76,14 +72,6 @@ def data_plot_screen():
     plt.plot(xp, yp)
     plt.show()
     plt.close()
-
-def get_graph_from_file(filepath):
-    xp = np.array( [ 0, 6 ] )
-    yp = np.array( [ 0, 250 ] )
-
-    plt.plot(xp, yp)
-    plt.show()
-
 
 def main():
     def argparser():
