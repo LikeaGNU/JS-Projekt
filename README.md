@@ -6,7 +6,7 @@
 - Tomasz Kundera
 
 ### Zależności
-- `console-log`
+- `console-menu`
 - `matplotlib`
 
 ### Krótka instrukcja użytkowania
