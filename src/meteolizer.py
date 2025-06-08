@@ -37,6 +37,7 @@ def datafile_import_screen():
 
     return file_content
 
+
 def get_graph_from_file(filepath):
 
     xp = np.array( [ 0, 6 ] )
