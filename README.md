@@ -8,6 +8,9 @@
 ### Zależności
 - `console-menu`
 - `matplotlib`
+- `memory_profiler`
+- `numpy`
+
 
 ### Krótka instrukcja użytkowania
 ```
@@ -36,7 +39,8 @@ options:
     ├── test.csv
     ├── tests
     │   ├── test_analysis.py
-    │   └── test_data_generator.py
+    │   ├── test_data_generator.py
+    │   └── test_models.py
     └── utils
         ├── analysis.py
         ├── data_generator.py
