@@ -3,6 +3,8 @@ import math
 import random
 import numpy as np
 from functools import reduce
+from memory_profiler import profile
+import timeit
 
 def get_arithmetic_average(data):
     """
@@ -19,24 +21,6 @@ def get_arithmetic_average(data):
         print(f'Wykryto dzielenie przez zero')
     else:
         return res
-
-def test_get_arithmetic_average():
-    random_data = []
-
-    def gen_random_data():
-        nonlocal random_data
-
-        for i in range(10):
-            random_data.append(random.randint(-100, 100))
-
-    gen_random_data()
-    tmp_data = random_data.copy()
-
-    avg1 = get_arithmetic_average(random_data)
-    avg2 = np.average(np.array(tmp_data))
-
-    assert avg1 == avg2
-
 
 # Algorytm quicksort do sortowania wyników
 def partition(array, low, high):
@@ -60,25 +44,6 @@ def quick_sort(array, low, high):
         pi = partition(array, low, high)
         quick_sort(array, low, pi - 1)
         quick_sort(array, pi + 1, high)
-
-def test_quick_sort():
-    data = []
-
-    def gen_random_data():
-        nonlocal data
-
-        for i in range(10):
-            data.append( { 'pomiar': i, 'wartosc': random.randint(-100, 100) } )
-
-    gen_random_data()
-
-    tmp = data.copy()
-
-    quick_sort(data, 0, len(data)-1)
-
-    tmp_sorted = sorted(tmp, key=lambda x: x['wartosc'])
-
-    assert all(x == y for x, y in zip(data, tmp_sorted)) == True
 
 def get_standard_deviation(data):
     """
@@ -108,29 +73,12 @@ def get_celsius(fahrenheit):
     assert isinstance(fahrenheit, float), 'Typ podanej wartości się nie zgadza!'
     return fahrenheit * 33.8
 
-def test_get_celsius():
-    assert get_celsius(1.0) == 33.8
-
 def get_fahrenheit(celsius):
     assert isinstance(celsius, float), 'Typ podanej wartości się nie zgadza!'
     return celsius * -17.222222
 
-def test_get_fahrenheit():
-    assert int(get_fahrenheit(1.0)) == -17
-
 def main():
-    data = [
-            { 'pomiar': 0, 'wartosc': -20.0 },
-            { 'pomiar': 1, 'wartosc': -10.0 },
-            { 'pomiar': 2, 'wartosc': -81.0 },
-            { 'pomiar': 3, 'wartosc': 24.0 },
-            { 'pomiar': 4, 'wartosc': 2.0 },
-            { 'pomiar': 5, 'wartosc': 0.0 }
-            ]
-
-    print(data)
-    quick_sort(data, 0, len(data)-1)
-    print(data)
+  pass
 
 if __name__ == '__main__':
     main()

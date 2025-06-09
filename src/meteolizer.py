@@ -8,6 +8,7 @@ import argparse
 import numpy as np
 
 import utils.data_generator as datagen
+import utils.analysis as asys
 
 csv_data = []
 
@@ -57,6 +58,26 @@ def save_graph_screen():
 
     save_screen.input(f'Zapisano plik obrazu w {filepath}')
 
+def plot_sorted_graph_screen():
+    global csv_data
+
+    tmp_data = csv_data.copy()
+
+    asys.quick_sort(tmp_data, 0, len(tmp_data)-1)
+
+    plot_screen = Screen()
+    plot_screen.clear()
+    plot_screen.println('Wykreśl graf w oparciu o posortowane zaimportowane dane\n\n')
+
+    xp = [ x['pomiar'] for x in tmp_data ]
+    yp = [ y['wartosc'] for y in tmp_data ]
+
+    plot_screen.input('Naciśnij dowolny klawisz, by wykreślić wykres... ')
+
+    plt.plot(xp, yp)
+    plt.show()
+    plt.close()
+
 def data_plot_screen():
     global csv_data
 
@@ -91,12 +112,14 @@ def main():
         gen_file = FunctionItem('Wygeneruj plik CSV z danymi', datafile_generation_screen)
         stats_data = FunctionItem('Wylicz i wyświetl dane statystyczne importowanego pliku', get_stats_from_file)
         plot_graph = FunctionItem('Wykreśl graf na podstawie danych z importowanego pliku', data_plot_screen)
+        plot_sorted_graph = FunctionItem('Wykreśl graf na podstawie posortowanych danych z importowanego pliku', plot_sorted_graph_screen)
         save_graph = FunctionItem('Zapisz graf wykreślony na podstawie pliku CSV', save_graph_screen)
 
         menu.append_item(import_file)
         menu.append_item(gen_file)
         menu.append_item(stats_data)
         menu.append_item(plot_graph)
+        menu.append_item(plot_sorted_graph)
         menu.append_item(save_graph)
 
         menu.show()
