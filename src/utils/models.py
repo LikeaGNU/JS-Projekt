@@ -1,3 +1,5 @@
+import unittest
+
 class Record:
     def __init__(self, stat_id, date, temp, hum):
         self.station_id = stat_id
@@ -31,4 +33,11 @@ Stacja:
     Szer. geograficzna: ${self.longitude}
     Wys. geograficzna: ${self.latitude}
                 """)
+
+class TestRecord(unittest.TestCase):
+    pass
+
+
+if __name__ == '__main__':
+    unittest.main()
 
