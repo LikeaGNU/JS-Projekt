@@ -9,8 +9,9 @@ import numpy as np
 
 import utils.data_generator as datagen
 import utils.analysis as asys
+import utils.models as models
 
-csv_data = []
+record = models.Record(list())
 
 def get_stats_from_file():
     pass
@@ -30,7 +31,7 @@ def datafile_generation_screen():
     datafile_screen.println(f'Wygenerowano plik CSV i zapisano w {filepath}')
 
 def datafile_import_screen():
-    global csv_data
+    global record 
 
     datafile_screen = Screen()
     datafile_screen.clear()
@@ -39,14 +40,18 @@ def datafile_import_screen():
     filepath = datafile_screen.input('Podaj ścieżkę plik CSV: ')
 
     file_content = datagen.data_reader(filepath)
-    csv_data = file_content.copy()
+    #csv_data = file_content.copy()
+    record.set_data(file_content)
+
 
 def save_graph_screen():
-    global csv_data
+    global record
 
     save_screen = Screen()
     save_screen.clear()
     save_screen.println('Nazwij plik wykresu')
+
+    csv_data = record.get_data()
 
     xp = [ x['pomiar'] for x in csv_data ]
     yp = [ y['wartosc'] for y in csv_data ]
@@ -59,9 +64,9 @@ def save_graph_screen():
     save_screen.input(f'Zapisano plik obrazu w {filepath}')
 
 def plot_sorted_graph_screen():
-    global csv_data
+    global record
 
-    tmp_data = csv_data.copy()
+    tmp_data = record.get_data()
 
     asys.quick_sort(tmp_data, 0, len(tmp_data)-1)
 
@@ -79,7 +84,9 @@ def plot_sorted_graph_screen():
     plt.close()
 
 def data_plot_screen():
-    global csv_data
+    global record
+
+    csv_data = record.get_data()
 
     plot_screen = Screen()
     plot_screen.clear()

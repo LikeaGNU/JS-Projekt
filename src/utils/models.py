@@ -1,43 +1,63 @@
-import unittest
+#!/usr/bin/python3
 
+
+# Tablica z właściwymi danymi
+# Nazwa pomiaru
+# Miesiąc
+# Rok
+# Nazwy wielkości
 class Record:
-    def __init__(self, stat_id, date, temp, hum):
-        self.station_id = stat_id
-        self.date = date
-        self.temperature = temp
-        self.humidity = hum
+    '''Pomiar'''
+    class Station:
+        '''Stacja badawcza'''
+        # name: nazwa stacji
+        # city: nazwa miasta
+        # quantity: mierzona wielkość fizyczna (temperatura)
+        def __init__(self):
+            pass
+        def set_name(self, new_name):
+            self.name = new_name
+        def set_city(self, new_city):
+            self.city = new_city
+        def set_quantity(self, new_quantity):
+            self.quantity = new_quantity
+        def get_name(self):
+            return self.name
+        def get_city(self):
+            return self.city
+        def get_quantity(self):
+            return self.quantity
+    def __init__(self, data):
+        self.data = data.copy()
+        self.station = self.Station()
+    def set_station_name(self, new_name):
+        self.station.set_name(new_name)
+    def set_station_city(self, new_city):
+        self.station.set_city(new_city)
+    def set_station_quantity(self, new_quantity):
+        self.station.set_quantity(new_quantity)
+    def get_station_name(self):
+        return self.station.get_name() if hasattr(self.station, 'name') else None
+    def get_station_city(self):
+        return self.station.get_city() if hasattr(self.station, 'city') else None
+    def get_station_quantity(self):
+        return self.station.get_quantity() if hasattr(self.station, 'quantity') else None
+    def set_data(self, new_data):
+        self.data = new_data.copy()
+    def get_data(self):
+        return self.data.copy()
 
-    def __repr__(self):
-        return (\
-            f"""
-Rekord:
-    ID stacji: ${self.station_id},
-    Data: ${self.date},
-    Temperatura: ${self.temperature},
-    Wilgotność: ${self.humidity}
-            """)
+def main():
+    data = [ 10, 20, 30 ]
 
-class Station:
-    def __init__(self, stat_id, name, lat, lon):
-        self.station_id = stat_id
-        self.name = name
-        self.latitude = lat
-        self.longitude = lon
+    record = Record(data)
 
-    def __repr__(self):
-        return (\
-                f"""
-Stacja:
-    ID: ${self.station_id},
-    Nazwa: ${self.name},
-    Szer. geograficzna: ${self.longitude}
-    Wys. geograficzna: ${self.latitude}
-                """)
+    record.set_station_name('Stacja 1')
+    record.set_station_city('Kielce')
+    record.set_station_quantity('Temperatura')
 
-class TestRecord(unittest.TestCase):
-    pass
-
+    print(record.get_station_name())
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
 
