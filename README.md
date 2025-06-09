@@ -31,15 +31,15 @@ options:
 ├── README.md
 ├── setup.cfg
 └── src
+    ├── dane.csv
     ├── meteolizer.py
     ├── test.csv
     ├── tests
-    │   └── test_analysis.py
+    │   ├── test_analysis.py
+    │   └── test_data_generator.py
     └── utils
         ├── analysis.py
         ├── data_generator.py
         ├── __init__.py
         └── models.py
-
-4 directories, 13 files
 ```
