@@ -2,6 +2,7 @@
 
 import csv
 import random
+import datetime
 
 def row_generator(n, minimum, maximum):
     """
@@ -55,6 +56,7 @@ def data_reader(filepath):
             file_content.append(line)
 
     return file_content
+
 
 def main():
     data = file_data_generator(10, (20, 30))
