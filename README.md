@@ -14,13 +14,24 @@
 
 ### Krótka instrukcja użytkowania
 ```
-usage: meteolizer [options]
+usage: Meteolizer [options]
 
 Analizator danych meteorologicznych
 
 options:
-  -h, --help            show this help message and exit
-  -f FILE, --file FILE  Ścieżka pliku z danymi meteo w formacie CSV
+  -h, --help         show this help message and exit
+  -n N               Liczba pomiarów
+  --tmin TMIN        Minimalna wartość temperatury (w stopniach Celsjusza)
+  --tmax TMAX        Maksymalna wartość temperatury (w stopniach Celsjusza)
+  --hmin HMIN        Minimalna wartość wilgotności (w procentach)
+  --hmax HMAX        Maksymalna wartość wilgotności (w procentach)
+  --wmin WMIN        Minimalna prędkość wiatru (m/s)
+  --wmax WMAX        Maksymalna prędkość wiatru (m/s)
+  --csvfile CSVFILE  Nazwa pliku do eksportu danych CSV
+  --csvdir CSVDIR    Ścieżka pliku do eksportu danych CSV
+
+Wykonany przez: Wojciech Lis, Tomasz Kundera
+
 ```
 
 ### Struktura projektu
@@ -47,3 +58,4 @@ options:
         ├── __init__.py
         └── models.py
 ```
+

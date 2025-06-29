@@ -171,7 +171,6 @@ def main():
             data = record.get_data()
 
             try:
-                #idx = 1
                 idx = insert_num(scr, args)
                 key = insert_param(scr, args)
             except (ValueError, TypeError) as e:
@@ -202,6 +201,18 @@ def main():
                     data[idx][key] = new_value
                     scr.println('Nadpisano dane!')
                     scr.input()
+        def show_data_scr(scr, args):
+            global record
+
+            data = record.get_data()
+
+            scr.println('Dane CSV')
+            scr.println()
+
+            for item in data:
+                scr.println(f"| {item['pomiar']} | {item['temperatura']} | {item['wilgotnosc']} | {item['predkosc_wiatru']} |")
+
+            scr.input()
 
 
         def modify_params_scr(scr, args):
@@ -350,8 +361,10 @@ def main():
         import_data = FunctionItem('Zaimportuj dane CSV z pliku', import_data_scr, [scr, args])
         gen_data = FunctionItem('Wygeneruj dane do pliku CSV', gen_data_scr, [scr, args])
         modify_data = FunctionItem('Nadpisz dane zaimportowane z pliku CSV', modify_data_scr, [scr, args])
+        show_data = FunctionItem('Pokaż zaimportowane dane CSV', show_data_scr, [scr, args])
 
         menu.append_item(show_params)
+        menu.append_item(show_data)
         menu.append_item(mod_params)
         menu.append_item(draw_graph)
         menu.append_item(import_data)
